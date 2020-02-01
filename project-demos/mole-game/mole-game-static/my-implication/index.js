@@ -66,10 +66,7 @@ function feed(e) {
 
 document.body.addEventListener('click', feed);
 
-// make moles move  根据 status 改变背景图片 类名 + css 控制消失与出现
 const move = () => {
-
-    // change status of each mole
     for (const mole of moles) {
         if (Date.now() > mole.next) {
 
@@ -80,3 +77,5 @@ const move = () => {
 };
 
 requestAnimationFrame(move);
+
+// TODO 待优化
