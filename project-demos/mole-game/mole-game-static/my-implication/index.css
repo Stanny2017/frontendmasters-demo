@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+section.app-wrapper {
+    background-image: url(../background.png);
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: url(../cursor.png), default;
+}
+
+.hole-container {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hole {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.hungry {
+    cursor: url(../cursor-worm.png), default;
+}
+
+.gone{
+    display: none;
+}
+
+img.mole {
+    width: 240px;
+    position: relative;
+    right: 20px;
+}
+
+img.worm {
+    height: 120px;
+}
