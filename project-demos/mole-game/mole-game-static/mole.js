@@ -135,7 +135,7 @@ const feed = e => {
     score += 10;
   }
 
-  if (score >= 100) {
+  if (score >= 10) {
     win();
     return;
   }

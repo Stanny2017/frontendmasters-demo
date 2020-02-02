@@ -1,34 +1,31 @@
+const MAX_INTERVAL = 10000;
+const MIN_INTERVAL = 2000;
+const FED_INTERVAL = 1000;
+const HUNGRY_INTERVAL = 3000;
+const MAX_SCORE = 5;
+let score = 0;
 
-const requestAnimationFrame = window.requestAnimationFrame;
+const getSadlInterval = () => Date.now() + FED_INTERVAL;
+const getHungeryInterval = () => Date.now() + HUNGRY_INTERVAL;
+const getGoneInterval = () => Date.now() + (Math.floor(Math.random() * MAX_INTERVAL) + MIN_INTERVAL);// [2,10]
 
-function getNode(key) {
-    return document.querySelector(`.hole-${key}`);
-}
-
-function getTimesGone() {
-    return Date.now() + (Math.floor(Math.random() * 10000) + 2000);// [2,10]
-}
-
+// 对十个 moles 建立关联状态对象，包含: 
+// 1. 节点引用 2. 当前状态 3. 下一次状态改变的时间间隔
 const moles = [];
-
-const initialTime = Date.now() + 1000;
-
 for (let i = 0; i < 10; i++) {
     moles.push({
-        node: getNode(i),
+        node: document.querySelector(`.hole-${i}`),
         status: 'fed',
-        next: initialTime,
+        next: getSadlInterval(),
     });
 }
 
-function makeMolesMove(mole) {
-
+const getNextStatus = (mole) => {
     switch (mole.status) {
-
         case 'sad':
         case 'fed':
             mole.status = 'leaving';
-            mole.next = Date.now() + 1000;
+            mole.next = getSadlInterval();
             mole.node.children[0].src = '../mole-leaving.png';
             break;
         case 'gone':
@@ -36,46 +33,50 @@ function makeMolesMove(mole) {
             mole.node.children[0].classList.remove('gone');
             mole.node.children[0].src = '../mole-hungry.png';
             mole.node.children[0].classList.add('hungry');
-            mole.next = Date.now() + 2000;
+            mole.next = getHungeryInterval();
             break;
         case 'hungry':
             mole.status = 'sad';
-            mole.next = Date.now() + 1000;
+            mole.next = getSadlInterval();
             mole.node.children[0].classList.remove('hungry');
             mole.node.children[0].src = '../mole-sad.png';
             break;
         case 'leaving':
             mole.status = 'gone';
-            mole.next = getTimesGone();
+            mole.next = getGoneInterval();
             mole.node.children[0].classList.add('gone');
             break;
-
         default:
         // do nothing
     }
-}
-
-function feed(e) {
-    if (e.target.tagName === 'IMG' && e.target.classList.contains('hungry')) {
-        e.target.src = '../mole-fed.png';
-
-        const mole = moles[+e.target.parentNode.dataset.index];
-        mole.status = 'fed';
-    }
-}
-
-document.body.addEventListener('click', feed);
-
-const move = () => {
-    for (const mole of moles) {
-        if (Date.now() > mole.next) {
-
-            makeMolesMove(mole);
-        }
-    }
-    requestAnimationFrame(move);
 };
 
-requestAnimationFrame(move);
+const nextFrame = () => {
+    for (const mole of moles) {
+        if (Date.now() > mole.next) {
+            getNextStatus(mole);
+        }
+    }
+    window.requestAnimationFrame(nextFrame);
+};
+window.requestAnimationFrame(nextFrame);
 
-// TODO 待优化
+const win = () => {
+    document.querySelector('.app-wrapper').classList.add('hide');
+    document.querySelector('.win-wrapper').classList.add('show');
+};
+
+const feed = (e) => {
+    if (e.target.tagName === 'IMG' && e.target.classList.contains('hungry')) {
+        e.target.src = '../mole-fed.png';
+        const mole = moles[+e.target.dataset.index];
+        mole.status = 'fed';
+
+        score++;
+        document.querySelector('.score-container').style.width = ` ${score / MAX_SCORE * 100}%`;
+        if (score >= MAX_SCORE) {
+            win();
+        }
+    }
+};
+document.body.addEventListener('click', feed);

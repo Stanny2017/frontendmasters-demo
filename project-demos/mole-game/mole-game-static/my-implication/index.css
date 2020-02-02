@@ -3,6 +3,15 @@
     padding: 0;
 }
 
+body {
+    background-color: cornsilk;
+}
+
+section.win-wrapper {
+    text-align: center;
+    display: none;
+}
+
 section.app-wrapper {
     background-image: url(../background.png);
     background-repeat: no-repeat;
@@ -12,6 +21,11 @@ section.app-wrapper {
     flex-wrap: wrap;
     justify-content: center;
     cursor: url(../cursor.png), default;
+}
+
+.score-container {
+    overflow: hidden;
+    transition: width 0.5s ease-in-out;
 }
 
 .hole-container {
@@ -32,8 +46,16 @@ section.app-wrapper {
     cursor: url(../cursor-worm.png), default;
 }
 
-.gone{
+.gone {
     display: none;
+}
+
+section.hide {
+    display: none;
+}
+
+section.show {
+    display: block;
 }
 
 img.mole {
