@@ -79,11 +79,13 @@ module.exports = {
 ### some common plugins
 
 1. `html-webpack-plugin`: automaticly generate the `dist/index.html` with the script js file in output. when you change filename and other thing it update itself automaticly. with this handy plugin, we don't need to manully change the script resource whichy insert in the index.html file.
-2. `webpack-dev-server` 
-
 
 ## webpack.config.js
 
 1. webpack 4 has a list of default settings, e.g. entry:'src/index.js', output:{filename:'main.js',//...}
 2. you can directly export a object config, or you can export a function that returns a config which helps you more control of the config.
 
+## `webpack-dev-server`
+
+1. for a live development experience.
+2. serves bundles in memory. every time the source code change. it's bundle agian and tells broswer to reload through socket connection.
