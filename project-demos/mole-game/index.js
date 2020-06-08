@@ -26,12 +26,12 @@ const getNextStatus = (mole) => {
         case 'fed':
             mole.status = 'leaving';
             mole.next = getSadlInterval();
-            mole.node.children[0].src = '../mole-leaving.png';
+            mole.node.children[0].src = './asserts/mole-leaving.png';
             break;
         case 'gone':
             mole.status = 'hungry';
             mole.node.children[0].classList.remove('gone');
-            mole.node.children[0].src = '../mole-hungry.png';
+            mole.node.children[0].src = './asserts/mole-hungry.png';
             mole.node.children[0].classList.add('hungry');
             mole.next = getHungeryInterval();
             break;
@@ -39,7 +39,7 @@ const getNextStatus = (mole) => {
             mole.status = 'sad';
             mole.next = getSadlInterval();
             mole.node.children[0].classList.remove('hungry');
-            mole.node.children[0].src = '../mole-sad.png';
+            mole.node.children[0].src = './asserts/mole-sad.png';
             break;
         case 'leaving':
             mole.status = 'gone';
@@ -68,7 +68,7 @@ const win = () => {
 
 const feed = (e) => {
     if (e.target.tagName === 'IMG' && e.target.classList.contains('hungry')) {
-        e.target.src = '../mole-fed.png';
+        e.target.src = './asserts/mole-fed.png';
         const mole = moles[+e.target.dataset.index];
         mole.status = 'fed';
 
