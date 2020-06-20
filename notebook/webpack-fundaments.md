@@ -88,4 +88,29 @@ module.exports = {
 ## `webpack-dev-server`
 
 1. for a live development experience.
-2. serves bundles in memory. every time the source code change. it's bundle agian and tells broswer to reload through socket connection.
+2. instead webpack creates all bundle in `dist` folder, it generates all bundles in `index.html` in memory, and serves that infomation up to express, every time the source code change. it's bundle agian and tells broswer to reload through socket connection.
+3. it's a web server based on express and made up of `webpack-dev-middleware` and `express`.
+4. `hot module replacement with css` can opens by add `--hot` arguments in scripts; webpack has capability of being able to patch changes are made incrementally and apply them without you having to reload the browser. it's super valuable when page is too complex and in that case reload is painful,and also it's very cool live feedback experience.
+
+## [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
+
+1. instead of use `style-loader` which add style tag into document head, `mini-css-extract-plugin` extract the imported css file into a single link tag.
+2. it's only webpack4 compatible
+3. usage:
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
