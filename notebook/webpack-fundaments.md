@@ -23,9 +23,19 @@ rules:[
     {
         test:/\.less$/,
         use:['style','css','less']
+    },
+    {
+        test:/\.jpe?g$/,
+        use:[{
+            loader:'url-loader',
+            options:{
+                limit:5000, // if the img size is lower than limit bytes then take base 64 data URI into img url ，otherwise only take this img,put into dist floder, and return the dist URI.(file-loader does this thing, that's why we need to install both of them)
+            }
+        }] // convert img to base 64 URI data 
     }
 ]
 ```
+6. common-loader:`css-loader` `style-loader` `url-loader` `filer-loader`
 
 ## plugins
 
@@ -79,6 +89,7 @@ module.exports = {
 ### some common plugins
 
 1. `html-webpack-plugin`: automaticly generate the `dist/index.html` with the script js file in output. when you change filename and other thing it update itself automaticly. with this handy plugin, we don't need to manully change the script resource whichy insert in the index.html file.
+2. `clean-webpack-plugin`: clean the dist folder firsr when build new bundles.
 
 ## webpack.config.js
 
@@ -95,7 +106,7 @@ module.exports = {
 ## [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
 
 1. instead of use `style-loader` which add style tag into document head, `mini-css-extract-plugin` extract the imported css file into a single link tag.
-2. it's only webpack4 compatible
+2. it's only webpack4 compatible，it support for lazy-loading css
 3. usage:
 
 ```js
@@ -113,4 +124,3 @@ module.exports = {
   },
 };
 ```
-
