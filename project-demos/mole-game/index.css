@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: cornsilk;
+}
+
+section.win-wrapper {
+    text-align: center;
+    display: none;
+}
+
+section.app-wrapper {
+    background-image: url(./asserts/background.png);
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: url(./asserts/cursor.png), default;
+}
+
+.score-container {
+    overflow: hidden;
+    transition: width 0.5s ease-in-out;
+}
+
+.hole-container {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hole {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.hungry {
+    cursor: url(./asserts/cursor-worm.png), default;
+}
+
+.gone {
+    display: none;
+}
+
+section.hide {
+    display: none;
+}
+
+section.show {
+    display: block;
+}
+
+img.mole {
+    width: 240px;
+    position: relative;
+    right: 20px;
+}
+
+img.worm {
+    height: 120px;
+}
