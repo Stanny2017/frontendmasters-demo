@@ -13,14 +13,14 @@ section.win-wrapper {
 }
 
 section.app-wrapper {
-    background-image: url(../background.png);
+    background-image: url(./asserts/background.png);
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    cursor: url(../cursor.png), default;
+    cursor: url(./asserts/cursor.png), default;
 }
 
 .score-container {
@@ -43,7 +43,7 @@ section.app-wrapper {
 }
 
 .hungry {
-    cursor: url(../cursor-worm.png), default;
+    cursor: url(./asserts/cursor-worm.png), default;
 }
 
 .gone {
