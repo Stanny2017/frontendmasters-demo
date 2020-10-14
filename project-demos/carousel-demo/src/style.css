@@ -1,0 +1,25 @@
+.carousel-wrap {
+    width: 500px;
+    margin: 100px auto;
+    overflow: hidden;
+}
+
+.img-list {
+    width: 800%;
+    transform: translate(-500px);
+    transition-duration: 100ms;
+}
+
+.img-list li {
+    height: 100%;
+    vertical-align: top;
+    width: 12.5%;
+    list-style: none;
+    display: inline-block;
+}
+
+img{
+    width: 100%;
+    height: 179px;
+}
+
