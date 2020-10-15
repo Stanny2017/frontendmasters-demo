@@ -28352,12 +28352,17 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"normalize.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"style.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./normalize.css":"normalize.css","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireWildcard(require("react"));
@@ -28370,17 +28375,69 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+/**
+ * 轮播图
+ * 1. 自动轮播
+ * 2. hover时停止轮播
+ * 3. 可以手动轮播
+ */
 function Carousel() {
+  var imgWrapper;
   var _imgs = ["https://img01.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_07a3a0d0aa964f9b835262bd2e84a355", "https://img04.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_59d7d81334224acf9cb8d46a4786cd2b", "https://img01.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=1080_563_b367837fc1fa4b889955c8e539ff70d0", "https://img03.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=897_383_30cc65e486d14d1ca26b7be572814673", "https://img03.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_18c34973135a40d8ade1eb1dae8c531e", "https://img04.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_d48f33fc2d97433496f08436da4ffa82"];
-  var lastIndex = _imgs.length - 1;
+  var imgsLen = _imgs.length;
+  var lastIndex = imgsLen - 1;
   var imgs = [_imgs[lastIndex]].concat(_imgs).concat(_imgs[0]);
-  (0, _react.useEffect)(function () {}, []);
+  (0, _react.useEffect)(function () {
+    makeImgsSwipe();
+  }, []);
+  /**
+   * 核心逻辑： 
+   * 当处于拼接的边界位置时，应在下一次滑动之前及时调整会当前的位置（durantion 设为0 无缝切换）
+   */
+
+  var swipeImg = function swipeImg() {
+    var styleLeft = window.getComputedStyle(imgWrapper).getPropertyValue('left'); // -500
+
+    var leftVal = parseInt(styleLeft);
+    console.log(leftVal);
+    var whichIndex = -leftVal / 500 - 1; // 0
+
+    console.log(whichIndex + 1); // 当前是第几张  已经停留3秒   即将滑向 whichIndex + 1 
+
+    if (whichIndex === imgsLen - 1) {
+      // imgWrapper.style.transitionDuration = '800ms'
+      imgWrapper.style.left = leftVal - 500 + 'px'; // 处于第一张 ，无缝校正位置
+
+      setTimeout(function () {
+        imgWrapper.style.transitionDuration = '0ms';
+        imgWrapper.style.left = 1 * -500 + 'px';
+      }, 800);
+      setTimeout(function () {
+        return imgWrapper.style.transitionDuration = '800ms';
+      }, 810);
+    } else {
+      // imgWrapper.style.transitionDuration = '800ms'
+      imgWrapper.style.left = leftVal - 500 + 'px';
+    }
+  };
+
+  function makeImgsSwipe() {
+    setInterval(function () {
+      swipeImg();
+    }, 1000);
+  }
+
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "carousel-wrap"
   }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: "img-list"
-  }, imgs.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
+    className: "img-list",
+    ref: function ref(_ref) {
+      return imgWrapper = _ref;
+    }
+  }, imgs.map(function (item, index) {
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: index
+    }, /*#__PURE__*/_react.default.createElement("img", {
       src: item,
       alt: "carousel-item"
     }));
@@ -28416,7 +28473,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63201" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53351" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
