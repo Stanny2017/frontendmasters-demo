@@ -28362,7 +28362,17 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./normalize.css":"normalize.css","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"./normalize.css":"normalize.css","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"data.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _imgs = ["https://img01.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_07a3a0d0aa964f9b835262bd2e84a355", "https://img04.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_59d7d81334224acf9cb8d46a4786cd2b", "https://img01.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=1080_563_b367837fc1fa4b889955c8e539ff70d0", "https://img03.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=897_383_30cc65e486d14d1ca26b7be572814673", "https://img03.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_18c34973135a40d8ade1eb1dae8c531e", "https://img04.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_d48f33fc2d97433496f08436da4ffa82"];
+var _default = _imgs;
+exports.default = _default;
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireWildcard(require("react"));
@@ -28371,81 +28381,118 @@ var _reactDom = require("react-dom");
 
 require("./style.css");
 
+var _data = _interopRequireDefault(require("./data"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 /**
- * 轮播图
+ * 无动画版轮播图
  * 1. 自动轮播
  * 2. hover时停止轮播
  * 3. 可以手动轮播
  */
+var imgs = _data.default;
+var imgsLen = _data.default.length;
+
 function Carousel() {
-  var imgWrapper;
-  var _imgs = ["https://img01.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_07a3a0d0aa964f9b835262bd2e84a355", "https://img04.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_59d7d81334224acf9cb8d46a4786cd2b", "https://img01.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=1080_563_b367837fc1fa4b889955c8e539ff70d0", "https://img03.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=897_383_30cc65e486d14d1ca26b7be572814673", "https://img03.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_18c34973135a40d8ade1eb1dae8c531e", "https://img04.sogoucdn.com/v2/thumb/retype/ext/auto/?appid=200698&name=980_340_d48f33fc2d97433496f08436da4ffa82"];
-  var imgsLen = _imgs.length;
-  var lastIndex = imgsLen - 1;
-  var imgs = [_imgs[lastIndex]].concat(_imgs).concat(_imgs[0]);
+  var timer = (0, _react.useRef)(null);
+
+  var _useState = (0, _react.useState)(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      currentIndex = _useState2[0],
+      setCurrentIndex = _useState2[1];
+
   (0, _react.useEffect)(function () {
-    makeImgsSwipe();
+    autoSlide();
   }, []);
-  /**
-   * 核心逻辑： 
-   * 当处于拼接的边界位置时，应在下一次滑动之前及时调整会当前的位置（durantion 设为0 无缝切换）
-   */
 
-  var swipeImg = function swipeImg() {
-    var styleLeft = window.getComputedStyle(imgWrapper).getPropertyValue('left'); // -500
-
-    var leftVal = parseInt(styleLeft);
-    console.log(leftVal);
-    var whichIndex = -leftVal / 500 - 1; // 0
-
-    console.log(whichIndex + 1); // 当前是第几张  已经停留3秒   即将滑向 whichIndex + 1 
-
-    if (whichIndex === imgsLen - 1) {
-      // imgWrapper.style.transitionDuration = '800ms'
-      imgWrapper.style.left = leftVal - 500 + 'px'; // 处于第一张 ，无缝校正位置
-
-      setTimeout(function () {
-        imgWrapper.style.transitionDuration = '0ms';
-        imgWrapper.style.left = 1 * -500 + 'px';
-      }, 800);
-      setTimeout(function () {
-        return imgWrapper.style.transitionDuration = '800ms';
-      }, 810);
+  function slideToNext() {
+    if (currentIndex === imgsLen - 1) {
+      currentIndex = 0;
     } else {
-      // imgWrapper.style.transitionDuration = '800ms'
-      imgWrapper.style.left = leftVal - 500 + 'px';
+      currentIndex++;
     }
-  };
 
-  function makeImgsSwipe() {
-    setInterval(function () {
-      swipeImg();
-    }, 1000);
+    setCurrentIndex(currentIndex);
   }
 
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "carousel-wrap"
-  }, /*#__PURE__*/_react.default.createElement("ul", {
-    className: "img-list",
-    ref: function ref(_ref) {
-      return imgWrapper = _ref;
+  function slideToPre() {
+    if (currentIndex === 0) {
+      currentIndex = imgsLen - 1;
+    } else {
+      currentIndex--;
     }
-  }, imgs.map(function (item, index) {
+
+    setCurrentIndex(currentIndex);
+  }
+
+  function slideTo(index) {
+    setCurrentIndex(index);
+  }
+
+  function stop() {
+    if (timer.current) clearInterval(timer.current);
+  }
+
+  var autoSlide = function autoSlide() {
+    var timerId = setInterval(function () {
+      slideToNext();
+    }, 2000);
+    timer.current = timerId;
+  };
+
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "carousel-wrap",
+    onMouseEnter: stop,
+    onMouseLeave: autoSlide
+  }, /*#__PURE__*/_react.default.createElement("ul", {
+    className: "img-list"
+  }, imgs.map(function (url, index) {
     return /*#__PURE__*/_react.default.createElement("li", {
-      key: index
+      key: index,
+      className: currentIndex === index ? 'show' : 'hidden'
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: item,
+      src: url,
       alt: "carousel-item"
     }));
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "control-btns"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "pre",
+    onClick: slideToPre
+  }, "<"), /*#__PURE__*/_react.default.createElement("div", {
+    className: "next",
+    onClick: slideToNext
+  }, ">")), /*#__PURE__*/_react.default.createElement("ul", {
+    className: "slide-pagination"
+  }, imgs.map(function (_, index) {
+    return /*#__PURE__*/_react.default.createElement("li", {
+      className: currentIndex === index ? 'current dot' : 'dot',
+      onClick: function onClick() {
+        return slideTo(index);
+      }
+    });
   })));
 }
 
 (0, _reactDom.render)( /*#__PURE__*/_react.default.createElement(Carousel, null), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./style.css":"style.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./style.css":"style.css","./data":"data.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -28473,7 +28520,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53351" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49962" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

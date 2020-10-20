@@ -1,30 +1,88 @@
-@import './normalize.css';
+@import "./normalize.css";
 
 .carousel-wrap {
-    width: 500px;
-    height: 200px;
+    width: 1000px;
+    height: 400px;
     margin: 100px auto;
     overflow: scroll;
+    position: relative;
 }
 
 .img-list {
     height: 100%;
-    width: 800%;
+    width: 100%;
     position: relative;
-    left: -500px;
-    /* transform: translate(-500px); */
-    transition-duration: 800ms;
 }
 
 .img-list li {
     height: 100%;
     vertical-align: top;
-    width: 12.5%;
+    width: 100%;
     list-style: none;
-    display: inline-block;
 }
 
 img {
     width: 100%;
     height: 100%;
+}
+
+.show {
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}
+
+.control-btns {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+.control-btns > div {
+    position: absolute;
+    width: 80px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    line-height: 400px;
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.control-btns .pre {
+    left: 0;
+}
+
+.control-btns .next {
+    right: 0;
+}
+
+.slide-pagination {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    width: 200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dot {
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+}
+
+.dot.current {
+    background-color: white;
 }
