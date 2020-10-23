@@ -4,7 +4,7 @@
     width: 1000px;
     height: 400px;
     margin: 100px auto;
-    overflow: scroll;
+    overflow: hidden;
     position: relative;
 }
 
@@ -85,4 +85,9 @@ img {
 
 .dot.current {
     background-color: white;
+}
+
+.animate.carousel-item {
+    display: inline-block;
+    width: 12.5%;
 }

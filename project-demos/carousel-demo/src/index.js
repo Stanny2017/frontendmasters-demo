@@ -67,7 +67,6 @@ function Carousel() {
                 }
             </ul>
 
-
             <div className="control-btns">
                 <div className="pre" onClick={slideToPre}>{`<`}</div>
                 <div className="next" onClick={slideToNext}>{`>`}</div>
