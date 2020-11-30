@@ -42,38 +42,45 @@ function Carousel() {
         $('.img-list').style.left = (parseInt($('.img-list').style.left) - imgWidth) + 'px';
     }
 
-    function scilentSlide() {
+    function animationSlidePre() {
+        $('.img-list').style.transition = 'all .5s'
+        $('.img-list').style.left = (parseInt($('.img-list').style.left) + imgWidth) + 'px';
+    }
+
+    function scilentSlideFirst() {
         $('.img-list').style.transition = 'all 0s'
         $('.img-list').style.left = -imgWidth + 'px';
+    }
+
+    function scilentSlideLast() {
+        $('.img-list').style.transition = 'all 0s'
+        $('.img-list').style.left = -6 * imgWidth + 'px';
     }
 
 
     function slideToNext() {
         // 设置正确的 index
+        animationSlide()
+
         if (currentIndex === imgsLen - 1) {
             currentIndex = 0;
-            animationSlide()
 
+            setTimeout(() => {
+                scilentSlideFirst();
+            }, 500)
         } else {
-            if (currentIndex === 0) {
-                scilentSlide();
-
-                setTimeout(() => {
-                    animationSlide();
-                }, 0)
-                // 
-            } else {
-                animationSlide();
-            }
             currentIndex++;
-
         }
         setCurrentIndex(currentIndex);
     }
 
     function slideToPre() {
+        animationSlidePre()
         if (currentIndex === 0) {
             currentIndex = imgsLen - 1;
+            setTimeout(() => {
+                scilentSlideLast();
+            }, 500)
         } else {
             currentIndex--;
         }
@@ -81,6 +88,11 @@ function Carousel() {
     }
 
     function slideTo(index) {
+
+        const delta = (index - currentIndex) * (-1000)
+
+        $('.img-list').style.transition = 'all .5s'
+        $('.img-list').style.left = (parseInt($('.img-list').style.left) + delta) + 'px';
         setCurrentIndex(index)
     }
 
