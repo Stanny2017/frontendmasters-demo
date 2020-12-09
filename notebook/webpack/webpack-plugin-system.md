@@ -44,7 +44,8 @@ what is Tapable？
  ### Compilation (aka：the dependency Graph)
 
  - it's where webpack kicks off building the dependency graphy.
- - created by Compiler 
+ - created by Compiler.
+ - the brain of webpack.
 
 
 
