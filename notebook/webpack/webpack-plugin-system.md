@@ -31,21 +31,46 @@ what is Tapable？
  
 
 
- ## 7 Tapable instance（aka classes）
+ # 7 Tapable instance（aka classes）
 
 
- ### Compiler
+ ## Compiler
 
 - exposed via Node API
 - top level、central dispatch
-- hooks are very top level， they controls when webpack starts, finish bundles, before compiles .etc. 
+- hooks are very top level， they controls lifecircle  such as when webpack starts, finish bundles, before compiles .etc. 
 
 
- ### Compilation (aka：the dependency Graph)
+ ## Compilation (aka：the dependency Graph)
 
  - it's where webpack kicks off building the dependency graphy.
  - created by Compiler.
  - the brain of webpack.
+ - it contains the dependency graph traversal algorithm.
 
 
+ ## Resolver
 
+ - give a partical path，and it's ganna to make sure it exists. 
+ - The Resolver instance asynchronously locates a module by its particle path
+ - it's faster than node synchronize resolver
+
+## Module Factory
+
+- create module instance,( Factory, which create objects)
+- Module Factories take successfully resolved requests and collect the source from the file to store the information in a module object
+
+## Parser
+
+- takes the string of the source code, and convert it to AST（Abtract syntax tree） 
+
+
+## Template
+
+- data bind for modules
+- create the code you see in the bundles
+
+
+# creating plugins
+
+through plugins, you can modify anthing in webpack
