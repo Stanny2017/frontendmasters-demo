@@ -18,4 +18,12 @@ it doesn't have to be a big, discruptive thing, we don't have to rewrite js, whe
 ## example
 
 1. run `tsc` command, by default, output es3 code which support from ie6(unnecessary)
-2. 
+2. `tsconfig.json`
+3. 
+
+
+## type & interface
+
+1. type 可以定义任何类型 包含基础
+3. interface 只能定义object 及其subType（function arr 等），不包含基础类型（primitive）
+3. interface 可继承
