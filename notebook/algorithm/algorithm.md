@@ -10,8 +10,6 @@
 ## some cases
  
 1. doing `shift()` or `unshift()` of array is `O(n)` in TC(time complexity);
-2. 
-
 ## recursion steps
 
 4 steps to write a recursion:
@@ -202,7 +200,8 @@ if you have a solution that you can cache, that's dynamic programmig;
 
 there is a couple of ways you can cache your solutions.
 
-top-down / bottom-up
+1. top-down
+2. bottom-up
 
 also the makeChange example above，the brute force loop every solution and repeated lots of calculations， now we will use `cache` to optimize it.
 
@@ -218,7 +217,7 @@ const makeChange = (value) => {
     coins.forEach((coin, i) => {
         if (value - coin >= 0) {
             let currMinCoins = makeChange(value - coin);  // recursive case to get closer to base case 
-            if (minCoins ==== -1 || currMinCoins < minCoins) {
+            if (minCoins === -1 || currMinCoins < minCoins) {
                 minCoins = currMinCoins;
             }
         }
