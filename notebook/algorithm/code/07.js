@@ -5,7 +5,6 @@ var merge = function (nums1, m, nums2, n) {
     let j = 0
     let i = 0
 
-    
 
     while (i < m + j) {
 
